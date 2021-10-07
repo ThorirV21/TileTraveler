@@ -7,6 +7,15 @@ WEST = 'w'
 
 def main():
     # The main program starts here
+
+    continue_playing = ""
+    while continue_playing != "n":
+        play()
+        continue_playing = input("Play again (y/n): ")
+
+
+
+def play():
     victory = False
     row = 1
     col = 1
@@ -19,7 +28,7 @@ def main():
         victory, col, row, coins = play_one_move(col, row, valid_directions, coins)
         
     print(f"Victory! Total coins {coins}.")
-
+    return
         
 def find_directions(col, row):
     ''' Returns valid directions as a string given the supplied location '''
