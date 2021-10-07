@@ -18,7 +18,7 @@ def main():
         print_directions(valid_directions)
         victory, col, row, coins = play_one_move(col, row, valid_directions, coins)
         
-    print("Victory!")
+    print(f"Victory! Total coins {coins}.")
 
         
 def find_directions(col, row):
