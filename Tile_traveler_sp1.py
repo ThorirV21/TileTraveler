@@ -11,10 +11,13 @@ def main():
     row = 1
     col = 1
 
+    coins = 0
+
     while not victory:
         valid_directions = find_directions(col, row)
         print_directions(valid_directions)
-        victory, col, row = play_one_move(col, row, valid_directions)
+        victory, col, row, coins = play_one_move(col, row, valid_directions, coins)
+        
     print("Victory!")
 
         
@@ -57,7 +60,7 @@ def print_directions(directions_str):
     print(".")
 
 
-def play_one_move(col, row, valid_directions):
+def play_one_move(col, row, valid_directions, coins):
     ''' Plays one move of the game
         Return if victory has been obtained and updated col,row '''
     victory = False
@@ -69,7 +72,9 @@ def play_one_move(col, row, valid_directions):
     else:
         col, row = move(direction, col, row)
         victory = is_victory(col, row)
-    return victory, col, row
+
+        coins = get_coin(col, row, coins)
+    return victory, col, row, coins
 
 
 def move(direction, col, row):
@@ -88,6 +93,19 @@ def move(direction, col, row):
 def is_victory(col, row):
     ''' Return true if player is in the victory cell '''
     return col == 3 and row == 1 # (3,1)
+
+
+def get_coin(col, row, coins):
+    coin_tiles = [[1,2], [2,2], [2,3], [3,2]]
+
+    if [col, row] in coin_tiles:
+        pull = input("Pull a lever (y/n): ")
+        
+        if pull.lower() == "y":
+            coins += 1
+            print(f"You received 1 coin, your total is now {coins}.")
+
+    return coins
 
 
 if __name__ == "__main__":
